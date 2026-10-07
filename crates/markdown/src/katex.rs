@@ -442,7 +442,7 @@ mod tests {
     }
 
     fn parsed_markdown(source: &str) -> ParsedMarkdown {
-        let events = crate::parser::parse_markdown_with_options(source, false, false).events;
+        let events = crate::parser::parse_markdown_with_options(source, false, false, false).events;
         ParsedMarkdown {
             source: source.into(),
             katex_diagrams: extract_katex_diagrams(&events),
@@ -536,7 +536,8 @@ mod tests {
     #[test]
     fn test_extract_katex_diagrams() {
         let markdown = "Inline $x^2$\n\n$$y$$";
-        let events = crate::parser::parse_markdown_with_options(markdown, false, false).events;
+        let events =
+            crate::parser::parse_markdown_with_options(markdown, false, false, false).events;
         let diagrams = extract_katex_diagrams(&events);
 
         assert_eq!(diagrams.len(), 2);
